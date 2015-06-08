@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ClojureScript в современной веб-разработке</title>
+  <link rel="stylesheet" href="js/reveal.js-master/css/reveal.css" />
+  <link rel="stylesheet" href="js/reveal.js-master/lib/css/zenburn.css">
+  <link rel="stylesheet" href="js/reveal.js-master/css/theme/solarized.css" />
+  <style>
+  @font-face {
+    font-family: "League Gothic";
+    src: url(font/league-gothic-cyrillic/OT-tt/LeagueGothicCyrillic.ttf) format("truetype");
+  }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h3>ClojureScript в современной веб-разработке</h3>
+        <img src="img/clojure-logo.png" alt="clojure-logo" style="border: none; box-shadow: none;">
+      </section>
+      <section>
+        <h3>Начнем с простого нехоливарного тезиса</h3>
+        <h3 class="fragment">Мы все делали неправильно!</h3>
+        <div class="fragment">
+          <pre>
+            <code data-trim>
+              Project tree:
+
+              |-- css
+              |   `-- global.css
+              |-- img
+              |   |-- border.jpg
+              |   |-- bg_top.gif
+              |   `-- logo.jpg
+              |-- js
+              |   |-- jquery.js
+              |   |-- prototype.js
+              |   `-- myscript.js
+              |-- html
+              |   |-- contact.html
+              |   |-- home.html
+              |   `-- products.html
+              `-- index.html
+            </code>
+          </pre>
+        </div>
+      </section>
+      <section>
+        <h3>Так считаю не только я, но и эти ребята:</h3>
+        <p class="fragment">
+          <img src="img/google-logo.png" alt="clojure-logo" style="border: none; box-shadow: none; max-height: 100px;">
+        </p>
+        <p class="fragment">
+          <img src="img/facebook-logo.png" alt="clojure-logo" style="border: none; box-shadow: none; max-height: 150px;">
+        </p>
+        <p class="fragment">
+          <img src="img/yandex-logo.png" alt="clojure-logo" style="border: none; box-shadow: none; max-height: 100px;">
+        </p>
+      </section>
+      <section>
+        <h3>Не нужно резать приложение по шву технологий</h3>
+        <h3>(js | css | html)!</h3>
+        <img src="img/jason.jpg" alt="jason">
+        <h3 class="fragment">Его нужно резать на логические блоки</h3>
+      </section>
+      <section>
+        <h3>У каждого свой путь</h3>
+        <p class="fragment">Google - <a href="https://googlewebcomponents.github.io/">Web Components</a></p>
+        <p class="fragment">Yandex - <a href="https://ru.bem.info/">BEM + BEM-tools</a></p>
+        <p class="fragment">Facebook - <a href="https://facebook.github.io/react/">React</a> + <a href="https://facebook.github.io/flux/">Flux</a></p>
+      </section>
+      <section>
+        <h3>Не смотря на плюсы других решений, мы в свое время выбрали...</h3>
+        <div class="fragment">
+          <h3>React.js</h3>
+          <img src="img/react-logo.png" alt="react-logo" style="border: none; box-shadow: none; max-height: 450px;" />
+        </div>
+      </section>
+      <section>
+        <h3>При первом знакомстве код из tutorial'a React.js...</h3>
+        <img src="img/react-code.png" alt="react-code">
+      </section>
+      <section>
+        <h3>... вызывает такую реакцию!</h3>
+        <img src="img/my-eyes.gif" alt="my-eyes" style="height: 500px;">
+        <h3 class="fragment">Но это только на первый взгляд!</h3>
+      </section>
+      <section>
+        <h3>На самом деле React очень хорош</h3>
+        <ol>
+          <li class="fragment">Он уже сейчас позвоялет писать независимые компоненты</li>
+          <li class="fragment">Это всего лишь библиотека, а не framework! Его можно использовать в любом проекте</li>
+          <li class="fragment">Состояние компонентов неизменяемо (нельзя сделать так <strong>component.title = "Some new title"</strong></li>
+        </ol>
+      </section>
+      <section>
+        <ol>
+          <div style="visibility:hidden">
+            <li></li>
+            <li></li>
+            <li></li>
+          </div>
+          <li>Состояние компонентов устанавливается явно! И это приводит к "реактивному" обновлению состояний дочерних элементов</li>
+          <li class="fragment">Функции в компонентах React.js - "практически" чистые (использование внешнего контекста сильно бъет по рукам). Они принимают данные и возвращают DOM (ну почти DOM)</li>
+          <li class="fragment">React.js - ОЧЕНЬ БЫСТРЫЙ!</li>
+        </ol>
+      </section>
+      <section>
+        <h3>Но у него есть один большой минус :( И имя ему...</h3>
+        <div class="fragment">
+          <h3>JavaScript</h3>
+          <img src="img/js-logo.png" alt="js-logo" style="max-height: 450px;" />
+        </div>
+      </section>
+      <section>
+        <h3>И тут на помощь нам приходит ClojureScript</h3>
+        <img src="img/clojurescript-logo.svg" alt="js-logo" style="border: none; box-shadow: none; max-height: 450px;" />
+      </section>
+      <section>
+        <h3>Плюсы ClojureScript</h3>
+        <ol>
+          <li class="fragment">Все приложение оптимизируется и минифицируется при помощи <a href="https://developers.google.com/closure/compiler/">Google Closure Compiler</a></li>
+          <li class="fragment">Модульность, анонимные функции с удобным синтаксисом, персистентные структуры данных, иммутабельность из коробки</li>
+          <li class="fragment">Очень выразительный</li>
+          <li class="fragment">И конечно же...</li>
+        </ol>
+      </section>
+      <section>
+        <h3>... НЕРАЕЛЬНО КРУТОЙ REPL!!!</h3>
+        <img src="img/thumbs-up.gif" style="min-height: 500px;">
+      </section>
+      <section>
+        <h3>Заменим React.js и CSS на <a href="https://reagent-project.github.io/">Reagent</a> и <a href="https://github.com/noprompt/garden">Garden</a> и получим независимый компонент</h3>
+      </section>
+      <section>
+        <h3>Начнем с Reagent'a</h3>
+        <ol>
+          <li class="fragment">Это практически тот же React.js</li>
+          <li class="fragment">Нет необходимости использывать XML в коде. Описываем HTML структурами данных ClojureScript</li>
+          <li class="fragment">Простой синтаксис</li>
+          <li class="fragment">Состояние приложения хранится в атомах, отдельно от компонетов. Мы можем обновлять состояние атомов, что влечет обновление компонентов, использующих данные атомы</li>
+        </ol>
+      </section>
+      <section>
+        <h3>Пример Reagent-компонента</h3>
+        <pre>
+          <code data-trim style="font-size: 16px;">
+            (ns example
+              (:require [reagent.core :as reagent :refer [atom]]))
+            (defn atom-input [value]
+              [:input {:type "text"
+                       :value @value
+                       :on-change #(reset! value (-> % .-target .-value))}])
+
+            (defn shared-state []
+              (let [val (atom "foo")]
+                (fn []
+                  [:div
+                   [:p "The value is now: " @val]
+                   [:p "Change it here: " [atom-input val]]])))
+          </code>
+        </pre>
+      </section>
+      <section>
+        <h3>Получаем это</h3>
+        <img src="img/reagent-example.png" alt="">
+      </section>
+      <section>
+        <h3>Добавим немного стиля!</h3>
+        <img src="img/gandalf-style.jpg" alt="" style="height: 500px;">
+      </section>
+      <section>
+        <h3>В этом нам поможет Garden</h3>
+        <ol>
+          <li class="fragment">Позволяет описывать CSS в том же стиле, что и Reagent</li>
+          <li class="fragment">Имеет возможность автоматической расстановки вендорных префиксов</li>
+          <li class="fragment">Данные - это код, а код - это данные. Мы можем реально программировать наш CSS :)</li>
+          <li class="fragment">Идеально сочетается с Reagent!</li>
+        </ol>
+      </section>
+      <section>
+        <h3>Пример использования Garden</h3>
+        <pre>
+          <code data-trim>
+            (css {:vendors ["webkit" "moz" "o"]}
+               [[:.fn-simple-component {:color "#353535"}]
+                [:.fn-simple-component-title
+                 ^:prefix {:border-radius "10px"}
+                 {:background-color "#f0f0f0"}
+                 {:text-align "center"}
+                 {:color "#353535"}
+                 {:height "200px"}
+                 {:padding "15px"}]]
+          </code>
+        </pre>
+      </section>
+      <section>
+        <h3>А теперь объединим Reagent и Garden</h3>
+      </section>
+      <section>
+        <pre class="stretch">
+          <code data-trim style="font-size: 16px;">
+            (ns frontend-new.components.simple-component
+                (:require
+                 [reagent.core :as reagent :refer [atom]]
+                 [garden.core :refer [css]]
+                 [frontend-new.common.css-helper :as css-helper :refer [include-css!]]))
+
+
+            (include-css! "fn-simple-component" (css {:vendors ["webkit" "moz" "o"]}
+                               [[:.fn-simple-component {:color "#353535"}]
+                                [:.fn-simple-component-title
+                                 ^:prefix {:border-radius "10px"}
+                                 {:background-color "#f0f0f0"}
+                                 {:text-align "center"}
+                                 {:color "#353535"}
+                                 {:height "200px"}
+                                 {:padding "15px"}]]))
+
+            (defn simple-component [title]
+              [:div {:class "fn-simple-component"}
+               [:h1 {:class "fn-simple-component-title"} title]])
+          </code>
+        </pre>
+      </section>
+      <section>
+        <h3>Мы получили независимый компонент!</h3>
+        <img src="img/independent-component.gif" alt="ic" style="min-height: 500px;">
+      </section>
+      <section>
+        <h3>Немного о REPL</h3>
+        <h4 class="fragment">Плюсы:</h4>
+        <ul>
+          <li class="fragment">Код можно выполять не перезапуская проект (прямо наживую)</li>
+          <li class="fragment">Постоянно имеем доступ к текущему состоянию приложения</li>
+          <li class="fragment">Очень быстрый способ получить feedback на изменения в коде</li>
+        </ul>
+        <h4 class="fragment">Что для этого нужно:</h4>
+        <ul>
+          <li class="fragment">В качестве редактора я использую Emacs</li>
+          <li class="fragment">Связь с браузером обеспечивает <a href="https://github.com/bhauman/lein-figwheel">Figwheel</a></li>
+          <li class="fragment">Для хорошего REPL'a (и не только) я использую <a href="https://github.com/clojure-emacs/cider">CIDER</a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>DEMO TIME!</h2>
+      </section>
+<!-- <section>
+  <h3>Если голова еще не закружилась...</h3>
+  <img src="img/crazy.gif" alt="" style="height: 500px;">
+</section>
+ -->  <section>
+        <h3>Задавайте вопросы, пожалуйста</h3>
+      </section>
+      <section>
+        <h3>Полезные сслыки</h3>
+        <ul>
+          <li><a href="http://habrahabr.ru/post/250103/">Как мы готовим React, Require и Backbone</a> - доклад моего коллеги о структуре одного из наших проектов (без ClojureScript, но с React.js)</li>
+          <li><a href="https://github.com/magomimmo/modern-cljs">Modern ClojureScript</a> - цикл туториалов по ClojureScript</li>
+          <li><a href="http://www.youtube.com/watch?v=aFUiULAC6zk">Как писать UI без боли React ClojureScript</a> - отличный доклад Александра Соловьева (@asolovyov) (лучше посмотреть все его доклады)</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Мои контакты:</h3>
+        <ul>
+          <li>Twitter: <a href="https://twitter.com/Golovim">@Golovim</a></li>
+          <li>GitHub: <a href="https://github.com/daynin">github.com/daynin</a></li>
+          <li>VK: <a href="https://vk.com/golovim">vk.com/golovim</a></li>
+          <li>Email: <strong>golovim@gmail.com</strong></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+  <script src="js/reveal.js-master/lib/js/head.min.js" type="text/javascript"></script>
+  <script src="js/reveal.js-master/js/reveal.js" type="text/javascript"></script>
+  <script>
+  // Full list of configuration options available at:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+
+    transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+    // Optional reveal.js plugins
+    dependencies: [{
+      src: 'js/reveal.js-master/lib/js/classList.js',
+      condition: function() {
+        return !document.body.classList;
+      }
+    }, {
+      src: 'js/reveal.js-master/plugin/markdown/marked.js',
+      condition: function() {
+        return !!document.querySelector('[data-markdown]');
+      }
+    }, {
+      src: 'js/reveal.js-master/plugin/markdown/markdown.js',
+      condition: function() {
+        return !!document.querySelector('[data-markdown]');
+      }
+    }, {
+      src: 'js/reveal.js-master/plugin/highlight/highlight.js',
+      async: true,
+      condition: function() {
+        return !!document.querySelector('pre code');
+      },
+      callback: function() {
+        hljs.initHighlightingOnLoad();
+      }
+    }, {
+      src: 'js/reveal.js-master/plugin/zoom-js/zoom.js',
+      async: true
+    }, {
+      src: 'js/reveal.js-master/plugin/notes/notes.js',
+      async: true
+    }]
+  });
+  </script>
+</body>
+
+</html>
